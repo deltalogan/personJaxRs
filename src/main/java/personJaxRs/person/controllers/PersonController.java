@@ -9,6 +9,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -30,19 +31,19 @@ public class PersonController {
 		}).build();
 	}
 
+//	@GET
+//	@Path("/read")
+//	@Produces(value = { MediaType.APPLICATION_XML, MediaType.APPLICATION_XML })
+//	public Response read() {
+//
+//		return Response.ok(new GenericEntity<BeanResponseCRUD>(new PersonDAOImplementation().read()) {
+//		}).build();
+//	}
+
 	@GET
 	@Path("/read")
-	@Produces(value = { MediaType.APPLICATION_XML, MediaType.APPLICATION_XML })
-	public Response read() {
-
-		return Response.ok(new GenericEntity<BeanResponseCRUD>(new PersonDAOImplementation().read()) {
-		}).build();
-	}
-
-	@GET
-	@Path("/read/{id : \\d+}")
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response read(@DefaultValue("0") @PathParam("id") long id) {
+	public Response read(@QueryParam("id") long id) {
 
 		return Response.ok(new GenericEntity<BeanResponseCRUD>(new PersonDAOImplementation().read(id)) {
 		}).build();
@@ -52,7 +53,7 @@ public class PersonController {
 	@Path("/update/{id : \\d+}")
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Consumes(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response update(PersonModel personModel, @DefaultValue("0") @PathParam("id") long id) {
+	public Response update(PersonModel personModel, @DefaultValue("-1") @PathParam("id") long id) {
 
 		return Response.ok(new GenericEntity<BeanResponseCRUD>(new PersonDAOImplementation().update(personModel, id)) {
 		}).build();
