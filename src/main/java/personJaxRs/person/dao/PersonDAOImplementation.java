@@ -45,8 +45,8 @@ public class PersonDAOImplementation implements PersonDAO {
 			preparedStatement.close();
 			connection.commit();
 			connection.close();
-			beanResponseCRUD = read(model.getId());
-			beanResponseCRUD.setMessage(read(model.getId()).getBeanResponseRead().getCount() > 0
+			beanResponseCRUD = read(String.valueOf(model.getId()));
+			beanResponseCRUD.setMessage(read(String.valueOf(model.getId())).getBeanResponseRead().getCount() > 0
 					? "Se agreg\u00f3 el registro con ID: " + model.getId() + "."
 					: "No se agreg\u00f3 el registro.");
 		}
@@ -123,7 +123,7 @@ public class PersonDAOImplementation implements PersonDAO {
 	}
 
 	@Override
-	public BeanResponseCRUD read(Long id) {
+	public BeanResponseCRUD read(String id) {
 		// TODO Auto-generated method stub
 		Connection connection = ConexionSQL.getConnection();
 
@@ -135,8 +135,13 @@ public class PersonDAOImplementation implements PersonDAO {
 
 		try {
 			PreparedStatement preparedStatement = connection
-					.prepareStatement("select count(id) as count from person p where id = ?;");
-			preparedStatement.setLong(1, id);
+					.prepareStatement("select count(" + (id.isEmpty() ? "*" : "id") + ") as count from person p"
+							+ (id.isEmpty() ? "" : " where id = ?;"));
+
+			if (!id.isEmpty())
+
+				preparedStatement.setString(1, id);
+
 			ResultSet resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next()) {
@@ -146,8 +151,13 @@ public class PersonDAOImplementation implements PersonDAO {
 				if (resultSet.getLong("count") > 0) {
 
 					resultSet.close();
-					preparedStatement = connection.prepareStatement("select * from person p where id = ?;");
-					preparedStatement.setLong(1, id);
+					preparedStatement = connection
+							.prepareStatement("select * from person p" + (id.isEmpty() ? "" : " where id = ?;"));
+
+					if (!id.isEmpty())
+
+						preparedStatement.setString(1, id);
+
 					resultSet = preparedStatement.executeQuery();
 
 					while (resultSet.next()) {
@@ -167,9 +177,11 @@ public class PersonDAOImplementation implements PersonDAO {
 
 			beanResponseRead.setList(personModelList);
 			beanResponseCRUD.setBeanResponseRead(beanResponseRead);
-			beanResponseCRUD
-					.setMessage(beanResponseRead.getCount() > 0 ? "Se list\u00f3 el registro con ID: " + id + "."
-							: "No se encontr\u00f3 el registro con ID: " + id + ".");
+			beanResponseCRUD.setMessage(id.isEmpty()
+					? (beanResponseRead.getCount() > 1 ? "Se listaron " + beanResponseRead.getCount() + " registro."
+							: "No se listaron registros.")
+					: (beanResponseRead.getCount() > 0 ? "Se list\u00f3 el registro con ID: " + id + "."
+							: "No se encontr\u00f3 el registro con ID: " + id + "."));
 			beanResponseCRUD.setStatus(MessageCode.SUCCESS);
 			preparedStatement.close();
 			resultSet.close();
@@ -211,10 +223,10 @@ public class PersonDAOImplementation implements PersonDAO {
 			preparedStatement.close();
 			connection.commit();
 			connection.close();
-			beanResponseCRUD = read(model.getId());
-			beanResponseCRUD.setMessage(
-					read(id).getBeanResponseRead().getCount() > 0 ? "Se modific\u00f3 el registro con ID: " + id + "."
-							: "No se encontr\u00f3 el registro.");
+			beanResponseCRUD = read(String.valueOf(model.getId()));
+			beanResponseCRUD.setMessage(read(String.valueOf(id)).getBeanResponseRead().getCount() > 0
+					? "Se modific\u00f3 el registro con ID: " + id + "."
+					: "No se encontr\u00f3 el registro.");
 		}
 
 		catch (SQLException e) {
@@ -241,10 +253,10 @@ public class PersonDAOImplementation implements PersonDAO {
 			preparedStatement.setLong(1, id);
 			preparedStatement.executeUpdate();
 //			updateCount = preparedStatement.getUpdateCount();
-			beanResponseCRUD = read(id);
-			beanResponseCRUD.setMessage(
-					read(id).getBeanResponseRead().getCount() > 0 ? "Se elimin\u00f3 el registro con ID: " + id + "."
-							: "No se encontr\u00f3 el registro.");
+			beanResponseCRUD = read(String.valueOf(id));
+			beanResponseCRUD.setMessage(read(String.valueOf(id)).getBeanResponseRead().getCount() > 0
+					? "Se elimin\u00f3 el registro con ID: " + id + "."
+					: "No se encontr\u00f3 el registro.");
 			preparedStatement.close();
 			connection.commit();
 			connection.close();

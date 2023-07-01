@@ -8,7 +8,7 @@ public interface CRUD<T> {
 
 	BeanResponseCRUD read();
 
-	BeanResponseCRUD read(Long id);
+	BeanResponseCRUD read(String id);
 
 	BeanResponseCRUD update(T model, Long id);
 

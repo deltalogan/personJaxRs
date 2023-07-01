@@ -8,7 +8,6 @@ personJaxRs\person\controllers\PersonController.class
 personJaxRs\person\dao\PersonDAO.class
 personJaxRs\person\controllers\PersonController$1.class
 personJaxRs\person\models\PersonModel.class
-personJaxRs\person\controllers\PersonController$5.class
 personJaxRs\person\controllers\PersonController$2.class
 personJaxRs\person\utilities\BeanResponseCRUD$MessageCode.class
 personJaxRs\person\dao\PersonDAOImplementation.class
