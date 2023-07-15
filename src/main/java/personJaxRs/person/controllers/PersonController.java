@@ -53,7 +53,7 @@ public class PersonController {
 	@Path("/update/{id : \\d+}")
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Consumes(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response update(PersonModel personModel, @DefaultValue("-1") @PathParam("id") long id) {
+	public Response update(PersonModel personModel, @PathParam("id") long id) {
 
 		return Response.ok(new GenericEntity<BeanResponseCRUD>(new PersonDAOImplementation().update(personModel, id)) {
 		}).build();
@@ -62,7 +62,7 @@ public class PersonController {
 	@DELETE
 	@Path("/delete/{id : \\d+}")
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response delete(@DefaultValue("0") @PathParam("id") long id) {
+	public Response delete(@PathParam("id") long id) {
 
 		return Response.ok(new GenericEntity<BeanResponseCRUD>(new PersonDAOImplementation().delete(id)) {
 		}).build();
