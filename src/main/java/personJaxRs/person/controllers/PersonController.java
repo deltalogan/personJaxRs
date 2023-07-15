@@ -31,15 +31,6 @@ public class PersonController {
 		}).build();
 	}
 
-//	@GET
-//	@Path("/read")
-//	@Produces(value = { MediaType.APPLICATION_XML, MediaType.APPLICATION_XML })
-//	public Response read() {
-//
-//		return Response.ok(new GenericEntity<BeanResponseCRUD>(new PersonDAOImplementation().read()) {
-//		}).build();
-//	}
-
 	@GET
 	@Path("/read")
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
