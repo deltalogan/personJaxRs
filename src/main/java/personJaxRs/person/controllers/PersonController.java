@@ -42,7 +42,7 @@ public class PersonController {
 
 	@GET
 	@Path("/read")
-	@Produces(value = { MediaType.APPLICATION_XML, MediaType.APPLICATION_XML })
+	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public Response read(@DefaultValue("") @QueryParam("id") String id) {
 
 		return Response.ok(new GenericEntity<BeanResponseCRUD>(new PersonDAOImplementation().read(id)) {
