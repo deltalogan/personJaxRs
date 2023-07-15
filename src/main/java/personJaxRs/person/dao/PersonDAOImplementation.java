@@ -60,67 +60,67 @@ public class PersonDAOImplementation implements PersonDAO {
 		return beanResponseCRUD;
 	}
 
-	@Override
-	public BeanResponseCRUD read() {
-		// TODO Auto-generated method stub
-		Connection connection = ConexionSQL.getConnection();
-
-		List<PersonModel> personModelList = new ArrayList<PersonModel>();
-
-		BeanResponseRead beanResponseRead = new BeanResponseRead();
-
-		BeanResponseCRUD beanResponseCRUD = new BeanResponseCRUD();
-
-		try {
-			PreparedStatement preparedStatement = connection
-					.prepareStatement("select count(id) as count from person p;");
-			ResultSet resultSet = preparedStatement.executeQuery();
-
-			while (resultSet.next()) {
-
-				beanResponseRead.setCount(resultSet.getLong("count"));
-
-				if (resultSet.getLong("count") > 0) {
-
-					resultSet.close();
-					preparedStatement = connection.prepareStatement("select * from person p;");
-					resultSet = preparedStatement.executeQuery();
-
-					while (resultSet.next()) {
-
-						PersonModel personModel = new PersonModel();
-
-						personModel.setBirthday(resultSet.getString("birthday"));
-						personModel.setCuil(resultSet.getString("cuil"));
-						personModel.setDni(resultSet.getString("dni"));
-						personModel.setEmail(resultSet.getString("email"));
-						personModel.setId(resultSet.getLong("id"));
-						personModel.setLastName(resultSet.getString("last_name"));
-						personModel.setName(resultSet.getString("name"));
-						personModelList.add(personModel);
-					}
-				}
-			}
-
-			beanResponseRead.setList(personModelList);
-			beanResponseCRUD.setBeanResponseRead(beanResponseRead);
-			beanResponseCRUD.setMessage(
-					beanResponseRead.getCount() > 0 ? "Se listaron " + beanResponseRead.getCount() + " registro/s."
-							: "No se listaron registros.");
-			beanResponseCRUD.setStatus(MessageCode.SUCCESS);
-			preparedStatement.close();
-			resultSet.close();
-			connection.close();
-		}
-
-		catch (SQLException e) {
-
-			beanResponseCRUD.setMessage(e.getMessage().toString());
-			beanResponseCRUD.setStatus(MessageCode.ERROR);
-		}
-
-		return beanResponseCRUD;
-	}
+//	@Override
+//	public BeanResponseCRUD read() {
+//		// TODO Auto-generated method stub
+//		Connection connection = ConexionSQL.getConnection();
+//
+//		List<PersonModel> personModelList = new ArrayList<PersonModel>();
+//
+//		BeanResponseRead beanResponseRead = new BeanResponseRead();
+//
+//		BeanResponseCRUD beanResponseCRUD = new BeanResponseCRUD();
+//
+//		try {
+//			PreparedStatement preparedStatement = connection
+//					.prepareStatement("select count(id) as count from person p;");
+//			ResultSet resultSet = preparedStatement.executeQuery();
+//
+//			while (resultSet.next()) {
+//
+//				beanResponseRead.setCount(resultSet.getLong("count"));
+//
+//				if (resultSet.getLong("count") > 0) {
+//
+//					resultSet.close();
+//					preparedStatement = connection.prepareStatement("select * from person p;");
+//					resultSet = preparedStatement.executeQuery();
+//
+//					while (resultSet.next()) {
+//
+//						PersonModel personModel = new PersonModel();
+//
+//						personModel.setBirthday(resultSet.getString("birthday"));
+//						personModel.setCuil(resultSet.getString("cuil"));
+//						personModel.setDni(resultSet.getString("dni"));
+//						personModel.setEmail(resultSet.getString("email"));
+//						personModel.setId(resultSet.getLong("id"));
+//						personModel.setLastName(resultSet.getString("last_name"));
+//						personModel.setName(resultSet.getString("name"));
+//						personModelList.add(personModel);
+//					}
+//				}
+//			}
+//
+//			beanResponseRead.setList(personModelList);
+//			beanResponseCRUD.setBeanResponseRead(beanResponseRead);
+//			beanResponseCRUD.setMessage(
+//					beanResponseRead.getCount() > 0 ? "Se listaron " + beanResponseRead.getCount() + " registro/s."
+//							: "No se listaron registros.");
+//			beanResponseCRUD.setStatus(MessageCode.SUCCESS);
+//			preparedStatement.close();
+//			resultSet.close();
+//			connection.close();
+//		}
+//
+//		catch (SQLException e) {
+//
+//			beanResponseCRUD.setMessage(e.getMessage().toString());
+//			beanResponseCRUD.setStatus(MessageCode.ERROR);
+//		}
+//
+//		return beanResponseCRUD;
+//	}
 
 	@Override
 	public BeanResponseCRUD read(String id) {

@@ -6,8 +6,6 @@ public interface CRUD<T> {
 
 	BeanResponseCRUD create(T model);
 
-	BeanResponseCRUD read();
-
 	BeanResponseCRUD read(String id);
 
 	BeanResponseCRUD update(T model, Long id);
