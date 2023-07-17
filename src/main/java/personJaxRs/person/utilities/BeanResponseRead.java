@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "BeanResponseRead")
 //@XmlTransient
 @XmlAccessorType(XmlAccessType.FIELD)
+//@JsonSerialize(include = Inclusion.NON_NULL)
 public class BeanResponseRead {
 
 	@XmlElement(name = "count")
