@@ -116,7 +116,7 @@ public class PersonDAOImplementation implements PersonDAO {
 			beanResponseRead.setList(personModelList);
 			beanResponseCRUD.setBeanResponseRead(beanResponseRead);
 			beanResponseCRUD.setMessage(id.isEmpty()
-					? (beanResponseRead.getCount() > 1 ? "Se listaron " + beanResponseRead.getCount() + " registro."
+					? (beanResponseRead.getCount() > 0 ? "Se listaron " + beanResponseRead.getCount() + " registro/s."
 							: "No se listaron registros.")
 					: (beanResponseRead.getCount() > 0 ? "Se list\u00f3 el registro con ID: " + id + "."
 							: "No se encontr\u00f3 el registro con ID: " + id + "."));
