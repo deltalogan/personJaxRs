@@ -45,8 +45,8 @@ public class PersonDAOImplementation implements PersonDAO {
 			preparedStatement.close();
 			connection.commit();
 			connection.close();
-			beanResponseCRUD = read(String.valueOf(model.getId()));
-			beanResponseCRUD.setMessage(read(String.valueOf(model.getId())).getBeanResponseRead().getCount() > 0
+			beanResponseCRUD = read(String.valueOf(model.getId()), null, null);
+			beanResponseCRUD.setMessage(read(String.valueOf(model.getId()), null, null).getBeanResponseRead().getCount() > 0
 					? "Se agreg\u00f3 el registro con ID: " + model.getId() + "."
 					: "No se agreg\u00f3 el registro.");
 		}
@@ -61,7 +61,7 @@ public class PersonDAOImplementation implements PersonDAO {
 	}
 
 	@Override
-	public BeanResponseCRUD read(String id) {
+	public BeanResponseCRUD read(String id, String limit, String numberOfPage) {
 		// TODO Auto-generated method stub
 		Connection connection = ConexionSQL.getConnection();
 
@@ -134,7 +134,7 @@ public class PersonDAOImplementation implements PersonDAO {
 
 		return beanResponseCRUD;
 	}
-
+	
 	@Override
 	public BeanResponseCRUD update(PersonModel model, Long id) {
 		// TODO Auto-generated method stub
@@ -158,8 +158,8 @@ public class PersonDAOImplementation implements PersonDAO {
 			preparedStatement.close();
 			connection.commit();
 			connection.close();
-			beanResponseCRUD = read(String.valueOf(model.getId()));
-			beanResponseCRUD.setMessage(read(String.valueOf(id)).getBeanResponseRead().getCount() > 0
+			beanResponseCRUD = read(String.valueOf(model.getId()), null, null);
+			beanResponseCRUD.setMessage(read(String.valueOf(id), null, null).getBeanResponseRead().getCount() > 0
 					? "Se modific\u00f3 el registro con ID: " + id + "."
 					: "No se encontr\u00f3 el registro.");
 		}
@@ -185,8 +185,8 @@ public class PersonDAOImplementation implements PersonDAO {
 			PreparedStatement preparedStatement = connection.prepareStatement("delete from person where id = ?;");
 			preparedStatement.setLong(1, id);
 			preparedStatement.executeUpdate();
-			beanResponseCRUD = read(String.valueOf(id));
-			beanResponseCRUD.setMessage(read(String.valueOf(id)).getBeanResponseRead().getCount() > 0
+			beanResponseCRUD = read(String.valueOf(id), null, null);
+			beanResponseCRUD.setMessage(read(String.valueOf(id), null, null).getBeanResponseRead().getCount() > 0
 					? "Se elimin\u00f3 el registro con ID: " + id + "."
 					: "No se encontr\u00f3 el registro.");
 			preparedStatement.close();

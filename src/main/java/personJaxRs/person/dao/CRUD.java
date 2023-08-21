@@ -6,7 +6,7 @@ public interface CRUD<T> {
 
 	BeanResponseCRUD create(T model);
 
-	BeanResponseCRUD read(String id);
+	BeanResponseCRUD read(String id, String limit, String numberOfPage);
 
 	BeanResponseCRUD update(T model, Long id);
 

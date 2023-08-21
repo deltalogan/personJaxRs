@@ -34,9 +34,9 @@ public class PersonController {
 	@GET
 	@Path("/read")
 	@Produces(value = { MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response read(@DefaultValue("") @QueryParam("id") String id) {
+	public Response read(@DefaultValue("") @QueryParam("id") String id, @DefaultValue("") @QueryParam("id") String limit, @DefaultValue("") @QueryParam("id") String numberOfPage) {
 
-		return Response.ok(new GenericEntity<BeanResponseCRUD>(new PersonDAOImplementation().read(id)) {
+		return Response.ok(new GenericEntity<BeanResponseCRUD>(new PersonDAOImplementation().read(id, limit, numberOfPage)) {
 		}).build();
 	}
 
