@@ -46,9 +46,10 @@ public class PersonDAOImplementation implements PersonDAO {
 			connection.commit();
 			connection.close();
 			beanResponseCRUD = read(String.valueOf(model.getId()), null, null);
-			beanResponseCRUD.setMessage(read(String.valueOf(model.getId()), null, null).getBeanResponseRead().getCount() > 0
-					? "Se agreg\u00f3 el registro con ID: " + model.getId() + "."
-					: "No se agreg\u00f3 el registro.");
+			beanResponseCRUD
+					.setMessage(read(String.valueOf(model.getId()), null, null).getBeanResponseRead().getCount() > 0
+							? "Se agreg\u00f3 el registro con ID: " + model.getId() + "."
+							: "No se agreg\u00f3 el registro.");
 		}
 
 		catch (SQLException e) {
@@ -134,7 +135,7 @@ public class PersonDAOImplementation implements PersonDAO {
 
 		return beanResponseCRUD;
 	}
-	
+
 	@Override
 	public BeanResponseCRUD update(PersonModel model, Long id) {
 		// TODO Auto-generated method stub

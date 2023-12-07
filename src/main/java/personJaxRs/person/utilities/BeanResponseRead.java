@@ -9,16 +9,16 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "BeanResponseRead")
-//@XmlTransient
+// @XmlTransient
 @XmlAccessorType(XmlAccessType.FIELD)
-//@JsonSerialize(include = Inclusion.NON_NULL)
+// @JsonSerialize(include = Inclusion.NON_NULL)
 public class BeanResponseRead {
 
 	@XmlElement(name = "count")
 	private Long count;
 
 	@XmlAnyElement(lax = true)
-//	@XmlElement(name = "list"/* , type = PersonModel.class */)
+	// @XmlElement(name = "list"/* , type = PersonModel.class */)
 	private List<?> list;
 
 	public Long getCount() {
