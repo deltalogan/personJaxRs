@@ -1,6 +1,8 @@
-.vscode/**
-.vscode
 .idea/**
 .idea
+.settings/**
+.settings
+.vscode/**
+.vscode
 target/**
 target
